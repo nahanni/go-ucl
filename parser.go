@@ -37,9 +37,9 @@ import (
 // have their own order for items.
 const KeyOrder = "--ucl-keyorder--"
 
-var ucldebug bool = true
+var Ucldebug bool = true
 func debug(a... interface{}) {
-	if ucldebug {
+	if Ucldebug {
 		fmt.Println(a)
 	}
 }
