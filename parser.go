@@ -37,6 +37,7 @@ import (
 // have their own order for items.
 const KeyOrder = "--ucl-keyorder--"
 
+// Allow to disable constructing the KeyOrder arrays
 var UclExportKeyOrder bool = true
 
 var Ucldebug bool = true
@@ -265,7 +266,10 @@ restart:
 		korder_intf, ok := themap[KeyOrder]
 		var korder []string
 		if !ok {
-			korder = make([]string, 0, 16)
+			if UclExportKeyOrder {
+				// only initialize if requested
+				korder = make([]string, 0, 16)
+			}
 		} else {
 			korder, ok = korder_intf.([]string)
 			if !ok {
@@ -308,8 +312,9 @@ restart:
 			}
 		} else {
 			// doesn't exist
-			korder = append(korder, k)
-			if UclExportKeyOrder {
+			if cap(korder) != 0 {
+				// only update KeyOrder if it was initialized
+				korder = append(korder, k)
 				themap[KeyOrder] = korder
 			}
 			themap[k] = res
