@@ -37,6 +37,8 @@ import (
 // have their own order for items.
 const KeyOrder = "--ucl-keyorder--"
 
+var UclExportKeyOrder bool = true
+
 var Ucldebug bool = true
 func debug(a... interface{}) {
 	if Ucldebug {
@@ -307,7 +309,9 @@ restart:
 		} else {
 			// doesn't exist
 			korder = append(korder, k)
-			themap[KeyOrder] = korder
+			if UclExportKeyOrder {
+				themap[KeyOrder] = korder
+			}
 			themap[k] = res
 		}
 		if t.state == BRACECLOSE {
