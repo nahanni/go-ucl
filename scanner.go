@@ -683,7 +683,6 @@ func (s *scanner) nexttags() (tags []*tag, err error) {
 					s.line++
 				}
 				s.bufi++
-				break
 
 			} else if (s.state == QUOTE && c == '"') ||
 			          (s.state == VQUOTE && c == '\'') {
@@ -792,8 +791,6 @@ func (s *scanner) nexttags() (tags []*tag, err error) {
 			}
 		}
 	}
-
-	return nil, err
 }
 
 func (s *scanner) LatestTag() (string, int) {

@@ -95,8 +95,6 @@ func (p *Parser) nexttag() (*tag, error) {
 			return m, nil
 		}
 	}
-
-	return nil, fmt.Errorf("end of input line %d", p.scanner.line)
 }
 
 
@@ -236,7 +234,6 @@ restart:
 		t = nil
 		goto restart
 	}
-	return parent, err
 }
 
 func (p *Parser) parse(t *tag, parent interface{}) (ret interface{}, err error) {

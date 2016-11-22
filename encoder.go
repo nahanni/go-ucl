@@ -83,7 +83,7 @@ func (e *encoder) doencode(v reflect.Value, parenttype, indent int) error {
 	switch v.Kind() {
 	case reflect.Map:
 		if v.Type().Key().Kind() != reflect.String {
-			return fmt.Errorf("<map>", v, "does not use string key")
+			return fmt.Errorf("<map> %v %s", v, "does not use string key")
 		}
 		return e.encodeMap(v, parenttype, indent)
 	case reflect.Struct:
@@ -93,7 +93,6 @@ func (e *encoder) doencode(v reflect.Value, parenttype, indent int) error {
 	default:
 		return e.encodeScalar(v, parenttype, indent)
 	}
-	return nil
 }
 
 // quote all strings that have non-alphanum
